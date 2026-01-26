@@ -176,29 +176,11 @@ const App: React.FC = () => {
             بلمسة <span className="opacity-40">رقمية ذكية.</span>
           </motion.h1>
 
-          {/* Prompt Bar (Dora Style) */}
-          <motion.div 
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="max-w-2xl mx-auto w-full relative mb-16"
-          >
-            <div className="glass p-3 rounded-[2.5rem] border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] flex items-center gap-4 group hover:border-white/20 transition-all duration-500">
-              <div className="flex-grow flex items-center gap-4 pr-5">
-                <Sparkles className="w-5 h-5 text-white/30 group-hover:text-white/60 transition-colors" />
-                <span className="text-white/30 text-sm md:text-base font-light text-right w-full cursor-text">بناء منصة متكاملة لتحويل الأفكار إلى واقع...</span>
-              </div>
-              <Button variant="primary" className="!rounded-3xl !py-3 !px-8 flex items-center gap-2 text-xs font-bold whitespace-nowrap !bg-white !text-black hover:!bg-slate-200 shadow-none">
-                توليد <ArrowRight className="w-4 h-4 rotate-180" />
-              </Button>
-            </div>
-          </motion.div>
-
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="flex flex-col items-center gap-6"
+            transition={{ delay: 0.5 }}
+            className="flex flex-col items-center gap-8"
           >
             <button className="flex items-center gap-4 text-white/40 hover:text-white transition-all text-xs font-bold tracking-widest uppercase">
               <div className="w-10 h-10 rounded-full glass flex items-center justify-center border-white/5">
