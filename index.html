@@ -34,20 +34,22 @@
         color: #ffffff;
         scroll-behavior: smooth;
         overflow-x: hidden;
+        line-height: 1.8; /* زيادة المسافة بين الأسطر لخطوط اللغة العربية */
       }
       
       .glass {
-        background: rgba(255, 255, 255, 0.02);
-        backdrop-filter: blur(24px);
-        -webkit-backdrop-filter: blur(24px);
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
       }
 
-      .text-gradient {
-        background: linear-gradient(to bottom, #ffffff 30%, #f97316 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        display: inline-block;
+      .text-glow-orange {
+        text-shadow: 0 0 30px rgba(249, 115, 22, 0.5);
+      }
+
+      .text-glow-white {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
       }
 
       .star-field {
@@ -57,54 +59,40 @@
         width: 100%;
         height: 100%;
         z-index: -1;
-        background: radial-gradient(circle at 50% 50%, #1a0f00 0%, #050505 100%);
+        background: #050505;
       }
 
       .star {
         position: absolute;
         background: white;
         border-radius: 50%;
-        opacity: 0.5;
+        opacity: 0.3;
         animation: twinkle var(--duration) infinite ease-in-out;
       }
 
       @keyframes twinkle {
         0%, 100% { opacity: 0.1; transform: scale(0.8); }
-        50% { opacity: 0.4; transform: scale(1.1); }
+        50% { opacity: 0.6; transform: scale(1.2); }
       }
 
       .hero-sphere {
         position: absolute;
-        top: 25%;
+        top: 15%;
         left: 50%;
         transform: translate(-50%, 0);
-        width: 120vw;
-        height: 120vw;
-        max-width: 1200px;
-        max-height: 1200px;
-        background: radial-gradient(circle at center, rgba(249, 115, 22, 0.1) 0%, rgba(249, 115, 22, 0.02) 40%, transparent 75%);
+        width: 140vw;
+        height: 140vw;
+        max-width: 1500px;
+        max-height: 1500px;
+        background: radial-gradient(circle at center, rgba(249, 115, 22, 0.12) 0%, rgba(249, 115, 22, 0.03) 40%, transparent 80%);
         border-radius: 50%;
         z-index: 0;
         pointer-events: none;
-        filter: blur(80px);
-      }
-
-      .hero-arc {
-        position: absolute;
-        top: 20%;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 140vw;
-        height: 100vw;
-        border-radius: 50%;
-        background: linear-gradient(to top, transparent, rgba(249, 115, 22, 0.03));
-        border-top: 1px solid rgba(249, 115, 22, 0.2);
-        z-index: 1;
-        pointer-events: none;
+        filter: blur(100px);
       }
 
       ::-webkit-scrollbar {
-        width: 5px;
+        width: 8px;
       }
       ::-webkit-scrollbar-track {
         background: #050505;
@@ -112,6 +100,11 @@
       ::-webkit-scrollbar-thumb {
         background: #f97316;
         border-radius: 10px;
+      }
+      
+      /* منع تداخل النصوص في العناوين الكبيرة */
+      h1, h2, h3 {
+        line-height: 1.5 !important;
       }
     </style>
     <script type="importmap">
@@ -133,15 +126,15 @@
     <div id="root"></div>
     <script>
       const field = document.getElementById('starField');
-      for (let i = 0; i < 150; i++) {
+      for (let i = 0; i < 120; i++) {
         const star = document.createElement('div');
         star.className = 'star';
-        const size = Math.random() * 1.5;
+        const size = Math.random() * 2.5;
         star.style.width = `${size}px`;
         star.style.height = `${size}px`;
         star.style.top = `${Math.random() * 100}%`;
         star.style.left = `${Math.random() * 100}%`;
-        star.style.setProperty('--duration', `${4 + Math.random() * 6}s`);
+        star.style.setProperty('--duration', `${2 + Math.random() * 6}s`);
         field.appendChild(star);
       }
     </script>
