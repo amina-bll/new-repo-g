@@ -45,7 +45,6 @@ const App: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Fix: Added missing toggleMobileMenu function to handle mobile menu state
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
   };
@@ -71,7 +70,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div ref={containerRef} className="min-h-screen selection:bg-blue-500/30 selection:text-white">
+    <div ref={containerRef} className="min-h-screen selection:bg-orange-500/30 selection:text-white">
       {/* Header */}
       <motion.header 
         initial={{ y: -100 }}
@@ -84,8 +83,8 @@ const App: React.FC = () => {
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            <div className="w-10 h-10 glass border-white/20 rounded-xl flex items-center justify-center font-bold text-xl">A</div>
-            <span className="text-xl font-bold tracking-tight">أركان <span className="opacity-40 font-light">ديجيتال</span></span>
+            <div className="w-10 h-10 glass border-orange-500/30 rounded-xl flex items-center justify-center font-bold text-xl text-orange-500">A</div>
+            <span className="text-xl font-bold tracking-tight">أركان <span className="opacity-40 font-light text-white">ديجيتال</span></span>
           </motion.div>
 
           <nav className="hidden lg:flex items-center gap-12">
@@ -94,8 +93,8 @@ const App: React.FC = () => {
                 key={item.href} 
                 href={item.href} 
                 onClick={(e) => scrollToSection(e, item.href)}
-                whileHover={{ y: -2 }}
-                className="text-white/50 hover:text-white transition-all font-medium text-xs tracking-widest uppercase"
+                whileHover={{ y: -2, color: '#f97316' }}
+                className="text-white/60 hover:text-orange-500 transition-all font-medium text-xs tracking-widest uppercase"
               >
                 {item.label}
               </motion.a>
@@ -103,8 +102,8 @@ const App: React.FC = () => {
           </nav>
 
           <div className="flex items-center gap-4">
-            <Button variant="outline" className="hidden md:block !border-white/10 !bg-white/5 hover:!bg-white/10 !px-6 !py-2 !text-xs tracking-wider" onClick={(e: any) => scrollToSection(e, '#process')}>
-              ابدأ الآن <ArrowRight className="inline-block mr-2 w-3 h-3 rotate-180" />
+            <Button variant="outline" className="hidden md:block !border-orange-500/20 !bg-orange-500/5 hover:!bg-orange-500/10 !px-6 !py-2 !text-xs tracking-wider" onClick={(e: any) => scrollToSection(e, '#process')}>
+              ابدأ الآن <ArrowRight className="inline-block mr-2 w-3 h-3 rotate-180 text-orange-500" />
             </Button>
             <button className="lg:hidden text-white p-2" onClick={toggleMobileMenu}>
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -126,13 +125,13 @@ const App: React.FC = () => {
                   <a 
                     key={item.href} 
                     href={item.href} 
-                    className="text-xl font-medium tracking-wide text-white/70" 
+                    className="text-xl font-medium tracking-wide text-white hover:text-orange-500 transition-colors" 
                     onClick={(e) => scrollToSection(e, item.href)}
                   >
                     {item.label}
                   </a>
                 ))}
-                <Button className="mt-4" onClick={() => scrollToSection({ preventDefault: () => {} } as any, '#process')}>احجز استشارة مجانية</Button>
+                <Button className="mt-4 !bg-orange-500 !text-white" onClick={() => scrollToSection({ preventDefault: () => {} } as any, '#process')}>احجز استشارة مجانية</Button>
               </div>
             </motion.div>
           )}
@@ -151,49 +150,49 @@ const App: React.FC = () => {
             className="mb-14"
           >
             <div className="relative inline-block">
-              <div className="absolute inset-0 bg-blue-500 blur-3xl opacity-20 animate-pulse"></div>
+              <div className="absolute inset-0 bg-orange-500 blur-3xl opacity-20 animate-pulse"></div>
               <motion.div 
                 animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="relative glass p-5 rounded-3xl border-white/20"
+                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                className="relative glass p-5 rounded-3xl border-orange-500/30"
               >
-                 <Sparkles className="w-8 h-8 text-white" />
+                 <Sparkles className="w-8 h-8 text-orange-500" />
               </motion.div>
-              <div className="absolute -top-3 -right-12 glass px-3 py-1 rounded-full text-[9px] font-black text-white/60 border-white/10 uppercase tracking-[0.2em]">
+              <div className="absolute -top-3 -right-12 glass px-3 py-1 rounded-full text-[9px] font-black text-orange-500 border-orange-500/30 uppercase tracking-[0.2em]">
                 BETA
               </div>
             </div>
-            <div className="mt-6 text-white font-medium text-lg tracking-widest opacity-80 uppercase">Arkan AI Engine</div>
+            <div className="mt-8 text-orange-500/80 font-medium text-sm tracking-[0.3em] uppercase">Arkan AI Engine</div>
           </motion.div>
 
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.8 }}
-            className="text-5xl md:text-8xl font-bold mb-12 tracking-tighter leading-[1.05] text-white"
+            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-16 tracking-tight leading-[1.3] text-white max-w-5xl mx-auto"
           >
             حلول <span className="text-gradient">تتجاوز التوقعات</span>، <br />
-            بلمسة <span className="opacity-40">رقمية ذكية.</span>
+            بلمسة <span className="text-orange-500">رقمية ذكية.</span>
           </motion.h1>
 
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="flex flex-col items-center gap-8"
+            className="flex flex-col items-center gap-10"
           >
-            <button className="flex items-center gap-4 text-white/40 hover:text-white transition-all text-xs font-bold tracking-widest uppercase">
-              <div className="w-10 h-10 rounded-full glass flex items-center justify-center border-white/5">
-                <Play className="w-3 h-3 fill-current ml-1" />
+            <button className="flex items-center gap-4 text-white/60 hover:text-white transition-all text-xs font-bold tracking-widest uppercase group">
+              <div className="w-12 h-12 rounded-full glass flex items-center justify-center border-orange-500/20 group-hover:border-orange-500/60 transition-all">
+                <Play className="w-4 h-4 fill-orange-500 text-orange-500 ml-1" />
               </div>
-              كيف نغير قواعد اللعبة
+              شاهد كيف نغير قواعد اللعبة
             </button>
             <motion.div 
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="mt-10 text-white/20"
+              className="mt-4 text-orange-500/40"
             >
-              <ArrowDown size={20} />
+              <ArrowDown size={24} />
             </motion.div>
           </motion.div>
         </div>
@@ -221,176 +220,20 @@ const App: React.FC = () => {
                 viewport={{ once: true }}
               >
                 <TiltCard className="h-full">
-                  <div className="group h-full p-12 rounded-[3rem] glass border-white/5 hover:border-white/10 transition-all duration-700 flex flex-col items-center text-center">
-                    <div className="w-24 h-24 glass rounded-[2rem] flex items-center justify-center mb-10 group-hover:scale-110 transition-transform duration-700 shadow-inner">
-                      {service.icon}
+                  <div className="group h-full p-12 rounded-[3rem] glass border-white/5 hover:border-orange-500/30 transition-all duration-700 flex flex-col items-center text-center">
+                    <div className="w-24 h-24 glass rounded-[2.5rem] flex items-center justify-center mb-10 group-hover:scale-110 group-hover:bg-orange-500/10 transition-all duration-700 shadow-inner border border-white/5">
+                      {React.cloneElement(service.icon as React.ReactElement, { className: 'w-8 h-8 text-orange-500' })}
                     </div>
-                    <h3 className="text-2xl font-bold mb-6 text-white tracking-tight">{service.title}</h3>
-                    <p className="text-white/40 leading-relaxed mb-12 text-sm font-light">{service.description}</p>
+                    <h3 className="text-2xl font-bold mb-6 text-white tracking-tight group-hover:text-orange-500 transition-colors">{service.title}</h3>
+                    <p className="text-white/40 leading-relaxed mb-12 text-base font-light">{service.description}</p>
                     <motion.button 
                       whileHover={{ scale: 1.05 }}
-                      className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30 hover:text-white transition-all border-b border-transparent hover:border-white/20 pb-1"
+                      className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40 hover:text-orange-500 transition-all border-b border-transparent hover:border-orange-500/30 pb-1"
                     >
                       تعرف على الحل
                     </motion.button>
                   </div>
                 </TiltCard>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Audience - Interactive selection visual */}
-      <motion.section 
-        id="audience" 
-        {...sectionAnimation}
-        className="py-40 relative overflow-hidden bg-white/[0.01]"
-      >
-        <div className="container mx-auto px-6 relative z-10">
-          <SectionHeading 
-            title="لمن هذه التجربة؟" 
-            subtitle="صممنا خدماتنا لتلائم القادة ورواد الأعمال والمهنيين الذين لا يقبلون بأقل من التميز الرقمي."
-          />
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {AUDIENCES.map((item, i) => (
-              <motion.div 
-                key={i} 
-                whileHover={{ scale: 1.02, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className="flex items-center gap-5 p-8 glass rounded-[2rem] border-white/5 cursor-default transition-all"
-              >
-                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-white/60">
-                  {item.icon}
-                </div>
-                <span className="font-bold text-lg text-white/90">{item.title}</span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Pain Points Section */}
-      <motion.section 
-        {...sectionAnimation}
-        className="py-40 relative"
-      >
-        <div className="container mx-auto px-6">
-          <div className="relative p-14 md:p-24 rounded-[4rem] glass border-white/5 overflow-hidden">
-            <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-blue-500/5 to-transparent pointer-events-none"></div>
-
-            <div className="grid md:grid-cols-2 gap-20 items-center relative z-10">
-              <div>
-                <motion.span 
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  className="text-white/20 text-[10px] font-black uppercase tracking-[0.4em] mb-8 block"
-                >
-                  Current Friction
-                </motion.span>
-                <h2 className="text-4xl md:text-6xl font-bold text-white mb-12 leading-tight tracking-tighter">
-                  الجمود الرقمي <br /> <span className="opacity-30">يقتل الإبداع.</span>
-                </h2>
-                <div className="space-y-10">
-                  {PAIN_POINTS.map((point, i) => (
-                    <motion.div 
-                      key={i}
-                      initial={{ opacity: 0, x: 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.1 }}
-                      className="flex gap-6 group"
-                    >
-                      <div className="w-14 h-14 flex-shrink-0 glass rounded-2xl flex items-center justify-center group-hover:bg-red-500/5 transition-colors">
-                        <AlertCircle className="w-6 h-6 text-white/10 group-hover:text-red-400/50 transition-colors" />
-                      </div>
-                      <p className="text-white/50 text-xl leading-relaxed font-light group-hover:text-white/80 transition-colors">{point.text}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="relative">
-                <TiltCard>
-                  <div className="aspect-square glass rounded-[4rem] border-white/10 p-16 flex flex-col justify-center items-center text-center shadow-[0_0_80px_rgba(0,0,0,0.3)]">
-                    <motion.div 
-                      animate={{ scale: [1, 1.1, 1] }}
-                      transition={{ duration: 4, repeat: Infinity }}
-                      className="w-32 h-32 bg-white/5 rounded-full flex items-center justify-center mb-10 border border-white/5"
-                    >
-                      <CheckCircle2 className="w-16 h-16 text-white/10" />
-                    </motion.div>
-                    <h4 className="text-2xl font-bold text-white mb-6">إعادة تعريف المسار</h4>
-                    <p className="text-white/30 text-base font-light">نحن نكسر الحواجز التقليدية لنفتح لك آفاقاً من الكفاءة التي لم تعهدها من قبل.</p>
-                  </div>
-                </TiltCard>
-              </div>
-            </div>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Benefits Grid */}
-      <motion.section 
-        {...sectionAnimation}
-        className="py-40"
-      >
-        <div className="container mx-auto px-6">
-          <SectionHeading 
-            title="جوهر الكفاءة" 
-            subtitle="لماذا يقع اختيار النخبة على أركان ديجيتال؟ الأمر يتعلق بالدقة والسرعة والنتائج."
-          />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {BENEFITS.map((benefit, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className="group p-10 rounded-[3rem] glass border-white/5 hover:border-white/20 transition-all duration-700 text-center"
-              >
-                <div className="mb-8 flex justify-center grayscale group-hover:grayscale-0 transition-all opacity-40 group-hover:opacity-100 duration-700 scale-110">
-                  {benefit.icon}
-                </div>
-                <h4 className="text-xl font-bold text-white mb-4 tracking-tight">{benefit.title}</h4>
-                <p className="text-white/30 text-sm leading-relaxed font-light">{benefit.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Process Section */}
-      <motion.section 
-        id="process" 
-        {...sectionAnimation}
-        className="py-40 relative"
-      >
-        <div className="container mx-auto px-6">
-          <SectionHeading 
-            title="خارطة الطريق" 
-            subtitle="منهجية واضحة، خطوات مدروسة، ونتائج ملموسة."
-          />
-          
-          <div className="grid md:grid-cols-4 gap-16 relative">
-            {PROCESS_STEPS.map((step, i) => (
-              <motion.div 
-                key={i} 
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className="flex flex-col items-center text-center group"
-              >
-                <div className="w-24 h-24 rounded-full glass border border-white/10 flex items-center justify-center mb-10 text-2xl font-black text-white/20 group-hover:text-white group-hover:border-blue-500/50 transition-all duration-700">
-                  {step.number}
-                </div>
-                <h3 className="text-xl font-bold mb-5 text-white/90 group-hover:text-white transition-colors">{step.title}</h3>
-                <p className="text-white/30 text-sm leading-relaxed font-light">{step.description}</p>
               </motion.div>
             ))}
           </div>
@@ -405,21 +248,21 @@ const App: React.FC = () => {
         <div className="container mx-auto px-6">
           <motion.div 
             whileHover={{ scale: 0.99 }}
-            className="relative p-20 md:p-32 rounded-[5rem] glass border-white/10 text-center overflow-hidden group"
+            className="relative p-20 md:p-32 rounded-[5rem] glass border-orange-500/20 text-center overflow-hidden group shadow-[0_40px_100px_-20px_rgba(0,0,0,0.5)]"
           >
-            <div className="absolute inset-0 bg-gradient-to-t from-blue-600/5 to-transparent"></div>
-            <div className="absolute -top-40 -left-40 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-orange-500/10 to-transparent"></div>
+            <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-orange-500/10 rounded-full blur-[150px]"></div>
             
             <div className="relative z-10">
-              <h2 className="text-4xl md:text-8xl font-bold text-white mb-12 leading-[1.1] tracking-tighter">
-                ابدأ رحلة <span className="text-gradient">التحول</span>.
+              <h2 className="text-4xl md:text-8xl font-bold text-white mb-12 leading-[1.3] tracking-tight">
+                ابدأ رحلة <span className="text-orange-500">التحول</span>.
               </h2>
-              <p className="text-white/40 text-xl max-w-2xl mx-auto mb-20 font-light leading-relaxed">
+              <p className="text-white/50 text-xl max-w-2xl mx-auto mb-20 font-light leading-relaxed">
                 دعنا نبني مستقبلك الرقمي اليوم. استشارتك الأولى هي الخطوة التي ستغير كل شيء.
               </p>
               <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
-                <Button variant="primary" className="!px-16 !py-6 text-lg !bg-white !text-black hover:!bg-blue-50 transition-all shadow-[0_20px_60px_-15px_rgba(255,255,255,0.2)]">ابدأ الآن</Button>
-                <Button variant="outline" className="!px-16 !py-6 text-lg !border-white/10 !text-white/60 hover:!text-white">تواصل معنا</Button>
+                <Button variant="primary" className="!px-16 !py-6 text-lg !bg-orange-500 !text-white hover:!bg-orange-400 transition-all shadow-[0_25px_80px_-15px_rgba(249,115,22,0.4)]">ابدأ الآن</Button>
+                <Button variant="outline" className="!px-16 !py-6 text-lg !border-white/10 !text-white/60 hover:!text-white hover:!border-white/30">تواصل معنا</Button>
               </div>
             </div>
           </motion.div>
@@ -427,11 +270,11 @@ const App: React.FC = () => {
       </motion.section>
 
       {/* Footer */}
-      <footer className="py-24 border-t border-white/5 relative z-10 bg-black/20">
+      <footer className="py-24 border-t border-orange-500/10 relative z-10 bg-black/50">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-12 mb-16">
             <div className="flex items-center gap-4">
-               <div className="w-12 h-12 glass border-white/20 rounded-2xl flex items-center justify-center font-bold text-2xl">A</div>
+               <div className="w-12 h-12 glass border-orange-500/30 rounded-2xl flex items-center justify-center font-bold text-2xl text-orange-500">A</div>
                <span className="text-2xl font-bold text-white">أركان <span className="opacity-20 font-light">ديجيتال</span></span>
             </div>
             <div className="flex gap-16 flex-wrap justify-center">
@@ -440,7 +283,7 @@ const App: React.FC = () => {
                   key={item.href} 
                   href={item.href} 
                   onClick={(e) => scrollToSection(e, item.href)}
-                  className="text-white/30 hover:text-white transition-colors text-xs font-bold tracking-widest uppercase"
+                  className="text-white/40 hover:text-orange-500 transition-colors text-xs font-bold tracking-widest uppercase"
                 >
                   {item.label}
                 </a>
@@ -448,7 +291,7 @@ const App: React.FC = () => {
             </div>
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-white/5 gap-6">
-            <p className="text-white/20 text-[10px] uppercase tracking-[0.4em]">Designed for the elite era of automation.</p>
+            <p className="text-white/20 text-[10px] uppercase tracking-[0.4em]">Designed for the orange era of excellence.</p>
             <p className="text-white/20 text-[10px] uppercase tracking-[0.2em]">© ٢٠٢٥ أركان ديجيتال. جميع الحقوق محفوظة.</p>
           </div>
         </div>

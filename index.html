@@ -17,9 +17,10 @@
               sans: ['Readex Pro', 'sans-serif'],
             },
             colors: {
-              space: {
-                950: '#02040a',
-                900: '#0a1128',
+              brand: {
+                orange: '#f97316',
+                deep: '#050505',
+                dark: '#0a0a0a',
               },
             },
           },
@@ -29,8 +30,8 @@
     <style>
       body {
         font-family: 'Readex Pro', sans-serif;
-        background-color: #02040a;
-        color: #f8fafc;
+        background-color: #050505;
+        color: #ffffff;
         scroll-behavior: smooth;
         overflow-x: hidden;
       }
@@ -39,13 +40,14 @@
         background: rgba(255, 255, 255, 0.02);
         backdrop-filter: blur(24px);
         -webkit-backdrop-filter: blur(24px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.05);
       }
 
       .text-gradient {
-        background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+        background: linear-gradient(to bottom, #ffffff 30%, #f97316 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        display: inline-block;
       }
 
       .star-field {
@@ -55,7 +57,7 @@
         width: 100%;
         height: 100%;
         z-index: -1;
-        background: radial-gradient(circle at 50% 50%, #0a1128 0%, #02040a 100%);
+        background: radial-gradient(circle at 50% 50%, #1a0f00 0%, #050505 100%);
       }
 
       .star {
@@ -67,48 +69,48 @@
       }
 
       @keyframes twinkle {
-        0%, 100% { opacity: 0.2; transform: scale(0.8); }
-        50% { opacity: 0.7; transform: scale(1.1); }
+        0%, 100% { opacity: 0.1; transform: scale(0.8); }
+        50% { opacity: 0.4; transform: scale(1.1); }
       }
 
       .hero-sphere {
         position: absolute;
-        top: 35%;
+        top: 25%;
         left: 50%;
         transform: translate(-50%, 0);
-        width: 140vw;
-        height: 140vw;
-        max-width: 1400px;
-        max-height: 1400px;
-        background: radial-gradient(circle at center, rgba(59, 130, 246, 0.12) 0%, rgba(59, 130, 246, 0.04) 40%, transparent 75%);
+        width: 120vw;
+        height: 120vw;
+        max-width: 1200px;
+        max-height: 1200px;
+        background: radial-gradient(circle at center, rgba(249, 115, 22, 0.1) 0%, rgba(249, 115, 22, 0.02) 40%, transparent 75%);
         border-radius: 50%;
         z-index: 0;
         pointer-events: none;
-        filter: blur(60px);
+        filter: blur(80px);
       }
 
       .hero-arc {
         position: absolute;
-        top: 30%;
+        top: 20%;
         left: 50%;
         transform: translateX(-50%);
-        width: 160vw;
-        height: 120vw;
+        width: 140vw;
+        height: 100vw;
         border-radius: 50%;
-        background: linear-gradient(to top, transparent, rgba(255, 255, 255, 0.03));
-        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        background: linear-gradient(to top, transparent, rgba(249, 115, 22, 0.03));
+        border-top: 1px solid rgba(249, 115, 22, 0.2);
         z-index: 1;
         pointer-events: none;
       }
 
       ::-webkit-scrollbar {
-        width: 6px;
+        width: 5px;
       }
       ::-webkit-scrollbar-track {
-        background: #02040a;
+        background: #050505;
       }
       ::-webkit-scrollbar-thumb {
-        background: #1e293b;
+        background: #f97316;
         border-radius: 10px;
       }
     </style>
@@ -131,15 +133,15 @@
     <div id="root"></div>
     <script>
       const field = document.getElementById('starField');
-      for (let i = 0; i < 200; i++) {
+      for (let i = 0; i < 150; i++) {
         const star = document.createElement('div');
         star.className = 'star';
-        const size = Math.random() * 2.5;
+        const size = Math.random() * 1.5;
         star.style.width = `${size}px`;
         star.style.height = `${size}px`;
         star.style.top = `${Math.random() * 100}%`;
         star.style.left = `${Math.random() * 100}%`;
-        star.style.setProperty('--duration', `${3 + Math.random() * 5}s`);
+        star.style.setProperty('--duration', `${4 + Math.random() * 6}s`);
         field.appendChild(star);
       }
     </script>
