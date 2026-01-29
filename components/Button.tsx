@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { motion } from 'framer-motion';
 
 interface ButtonProps {
   children: React.ReactNode;
@@ -9,17 +10,22 @@ interface ButtonProps {
 }
 
 export const Button: React.FC<ButtonProps> = ({ children, variant = 'primary', className = '', onClick }) => {
-  const baseStyles = 'px-12 py-5 rounded-2xl font-bold transition-all duration-500 active:scale-95 text-sm uppercase tracking-[0.2em] overflow-hidden relative group';
+  const baseStyles = 'px-10 py-4 rounded-2xl font-bold transition-all duration-300 active:scale-95 text-sm uppercase tracking-widest flex items-center justify-center gap-3 overflow-hidden relative group';
   const variants = {
-    primary: 'bg-orange-500 text-white hover:bg-orange-400 shadow-[0_15px_40px_-10px_rgba(249,115,22,0.6)]',
-    secondary: 'bg-white text-black hover:bg-slate-100 shadow-xl shadow-white/10',
-    outline: 'border border-white/20 bg-white/5 text-white hover:text-orange-500 hover:border-orange-500/50 hover:bg-orange-500/5 backdrop-blur-md',
+    primary: 'bg-brand-blue text-white hover:bg-brand-cyan shadow-xl shadow-brand-blue/20',
+    secondary: 'bg-brand-deep text-white hover:bg-slate-800 shadow-lg border border-slate-700',
+    outline: 'border-2 border-brand-blue/40 text-brand-blue hover:bg-brand-blue hover:text-white',
   };
 
   return (
-    <button className={`${baseStyles} ${variants[variant]} ${className}`} onClick={onClick}>
-      <span className="relative z-10">{children}</span>
-      <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-    </button>
+    <motion.button 
+      whileHover={{ y: -3 }}
+      whileTap={{ scale: 0.97 }}
+      className={`${baseStyles} ${variants[variant]} ${className}`} 
+      onClick={onClick}
+    >
+      <div className="absolute inset-0 w-full h-full bg-white/10 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
+      <span className="relative z-10 flex items-center gap-2">{children}</span>
+    </motion.button>
   );
 };
