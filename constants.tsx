@@ -16,7 +16,10 @@ import {
   Target,
   Share2,
   Lock,
-  Search
+  Search,
+  Sparkles,
+  Command,
+  Activity
 } from 'lucide-react';
 import { NavItem, Service, Template, Language } from './types';
 
@@ -30,18 +33,18 @@ export const TRANSLATIONS = {
   ar: {
     brand: 'منارة تك',
     heroTitle: 'أتمتة ذكية.. لنمو يتجاوز التوقعات',
-    heroSub: 'نحن لا نبني أكواداً فحسب، بل نصمم الأنظمة التي تمنحك الحرية والسيادة على وقتك وجهدك.',
-    ctaMain: 'اكتشف مستقبلك الرقمي',
+    heroSub: 'نحن لا نبني أكواداً فحسب، بل نصمم أنظمة توليدية تمنحك السيادة الكاملة على وقتك وجهدك عبر n8n.',
+    ctaMain: 'ابدأ الأتمتة الآن',
     navHome: 'الرئيسية',
-    navStore: 'متجر الحلول الجاهزة',
-    navContact: 'تواصل مباشر',
+    navStore: 'المتجر',
+    navContact: 'تواصل معنا',
     triangleTitle: 'معادلة السيادة التشغيلية',
     triangleSub: 'ثلاث ركائز لا غنى عنها لأي مؤسسة تطمح للريادة في العصر الرقمي.',
-    tMoney: 'توفير مالي ذكي',
-    tTime: 'تحرير وقتك الثمين',
+    tMoney: 'توفير مالي',
+    tTime: 'تحرير الوقت',
     tEffort: 'أداء بلا إجهاد',
-    storeTitle: 'حلول جاهزة للانطلاق',
-    storeSub: 'قوالب احترافية بأسعار منافسة، تم فحصها وتجربتها لتعمل فوراً في بيئة عملك.',
+    storeTitle: 'النماذج الجاهزة',
+    storeSub: 'قوالب احترافية تعتمد على n8n، تم فحصها وتجربتها لتعمل فوراً في بيئة عملك.',
     priceFrom: 'فقط بـ',
     buyNow: 'امتلك الحل الآن',
     synergyTitle: 'مخطط التآزر الذكي',
@@ -52,26 +55,32 @@ export const TRANSLATIONS = {
     solutionTitle: 'هندسة الحل:',
     contactTitle: 'دعنا نصمم نجاحك',
     contactSub: 'استشارة فنية مجانية لمدة 15 دقيقة قد تغير مسار عملك بالكامل.',
-    telegram: 'تحدث عبر تليجرام',
-    email: 'راسلنا بريدياً',
+    telegram: 'تليجرام',
+    email: 'بريد إلكتروني',
     backToHome: 'الرئيسية',
-    roiTitle: 'نتائج نضمنها لك'
+    roiTitle: 'نتائج نضمنها لك',
+    formName: 'الاسم الكامل',
+    formEmail: 'البريد الإلكتروني',
+    formMessage: 'تفاصيل مشروعك',
+    formSubmit: 'إرسال الطلب',
+    formSuccess: 'تم الإرسال بنجاح! سنتواصل معك قريباً.',
+    formProject: 'نوع المشروع'
   },
   en: {
     brand: 'Manara Tech',
-    heroTitle: 'Smart Automation for Limitless Growth',
-    heroSub: 'We don’t just write code; we design systems that grant you freedom and sovereignty over your time.',
-    ctaMain: 'Discover Your Digital Future',
+    heroTitle: 'Smart Automation, Growth Beyond Expectations',
+    heroSub: 'We don’t just write code; we design generative systems that grant you absolute sovereignty over your time via n8n.',
+    ctaMain: 'Start Automating',
     navHome: 'Home',
-    navStore: 'Template Store',
-    navContact: 'Direct Contact',
+    navStore: 'Store',
+    navContact: 'Contact Us',
     triangleTitle: 'Operational Sovereignty Equation',
     triangleSub: 'Three essential pillars for any organization aiming for leadership in the digital age.',
-    tMoney: 'Smart Cost Saving',
-    tTime: 'Free Your Precious Time',
-    tEffort: 'Stress-Free Performance',
-    storeTitle: 'Ready-to-Deploy Solutions',
-    storeSub: 'Professional templates at competitive prices, tested and ready to work in your environment.',
+    tMoney: 'Cost Efficiency',
+    tTime: 'Time Freedom',
+    tEffort: 'Effortless Performance',
+    storeTitle: 'Ready-to-Deploy Templates',
+    storeSub: 'Professional n8n templates, tested and ready to work in your environment.',
     priceFrom: 'Only',
     buyNow: 'Get Solution Now',
     synergyTitle: 'The Smart Synergy Map',
@@ -82,26 +91,32 @@ export const TRANSLATIONS = {
     solutionTitle: 'Solution Engineering:',
     contactTitle: 'Let’s Design Your Success',
     contactSub: 'A free 15-minute consultation could change your entire business path.',
-    telegram: 'Chat on Telegram',
-    email: 'Email Us',
+    telegram: 'Telegram',
+    email: 'Email',
     backToHome: 'Back Home',
-    roiTitle: 'Guaranteed Results'
+    roiTitle: 'Guaranteed Results',
+    formName: 'Full Name',
+    formEmail: 'Email Address',
+    formMessage: 'Project Details',
+    formSubmit: 'Send Request',
+    formSuccess: 'Sent successfully! We will contact you soon.',
+    formProject: 'Project Type'
   },
   fr: {
     brand: 'Manara Tech',
-    heroTitle: 'Automatisation Intelligente pour une Croissance Sans Limite',
-    heroSub: 'Nous ne nous contentons pas d’écrire du code ; nous concevons des systèmes qui vous libèrent.',
-    ctaMain: 'Découvrez Votre Futur Numérique',
+    heroTitle: 'Croissance Exponentielle : L\'Automatisation Intelligente',
+    heroSub: 'Nous ne nous contentons pas d’écrire du code ; nous concevons des systèmes génératifs via n8n.',
+    ctaMain: 'Commencer',
     navHome: 'Accueil',
-    navStore: 'Boutique de Modèles',
-    navContact: 'Contact Direct',
+    navStore: 'Boutique',
+    navContact: 'Contactez-nous',
     triangleTitle: "Équation de Souveraineté Opérationnelle",
     triangleSub: 'Trois piliers essentiels pour toute organisation visant le leadership à l’ère numérique.',
-    tMoney: 'Économie Intelligente',
-    tTime: 'Libérez Votre Temps',
-    tEffort: 'Performance Sans Stress',
-    storeTitle: 'Solutions Prêtes à l’Emploi',
-    storeSub: 'Modèles professionnels à des prix compétitifs, testés et prêts à l’emploi.',
+    tMoney: 'Économie de Coûts',
+    tTime: 'Liberté de Temps',
+    tEffort: 'Performance Sans Effort',
+    storeTitle: 'Modèles Prêts à l’Emploi',
+    storeSub: 'Modèles n8n professionnels, testés et prêts à l’emploi.',
     priceFrom: 'Seulement',
     buyNow: 'Obtenir la Solution',
     synergyTitle: 'Carte de Synergie Intelligente',
@@ -112,47 +127,53 @@ export const TRANSLATIONS = {
     solutionTitle: 'Ingénierie du Solution :',
     contactTitle: 'Concevons Votre Succès',
     contactSub: 'Une consultation gratuite de 15 minutes pourrait changer votre trajectoire.',
-    telegram: 'Chat sur Telegram',
-    email: 'Écrivez-nous',
+    telegram: 'Telegram',
+    email: 'Email',
     backToHome: 'Accueil',
-    roiTitle: 'Résultats Garantis'
+    roiTitle: 'Résultats Garantis',
+    formName: 'Nom complet',
+    formEmail: 'E-mail',
+    formMessage: 'Détails du projet',
+    formSubmit: 'Envoyer la demande',
+    formSuccess: 'Envoyé avec succès ! Nous vous contacterons bientôt.',
+    formProject: 'Type de projet'
   }
 };
 
 export const TRIANGLE_POINTS = (lang: string) => [
-  { id: 'money', title: TRANSLATIONS[lang].tMoney, icon: <Coins className="w-8 h-8" /> },
-  { id: 'time', title: TRANSLATIONS[lang].tTime, icon: <Clock className="w-8 h-8" /> },
-  { id: 'effort', title: TRANSLATIONS[lang].tEffort, icon: <BrainCircuit className="w-8 h-8" /> },
+  { id: 'money', title: TRANSLATIONS[lang].tMoney, icon: <Coins size={32} /> },
+  { id: 'time', title: TRANSLATIONS[lang].tTime, icon: <Clock size={32} /> },
+  { id: 'effort', title: TRANSLATIONS[lang].tEffort, icon: <BrainCircuit size={32} /> },
 ];
 
 export const TEMPLATES: Template[] = [
   {
     id: 'rag-light',
     title: 'نظام RAG ذكي (قاعدة معرفة)',
-    price: '149$',
-    features: ['بحث ذكي في ملفات PDF', 'واجهة دردشة سريعة', 'سهل التنصيب'],
-    icon: <Database className="w-8 h-8" />
+    price: '$149',
+    features: ['بحث ذكي في ملفات PDF', 'واجهة دردشة سريعة', 'سهل التنصيب عبر n8n'],
+    icon: <Database size={40} />
   },
   {
     id: 'chatbot-basic',
     title: 'بوت خدمة عملاء آلي',
-    price: '99$',
+    price: '$99',
     features: ['ردود سريعة ذكية', 'ربط مع Telegram', 'لوحة تحكم بسيطة'],
-    icon: <MessageSquare className="w-8 h-8" />
+    icon: <MessageSquare size={40} />
   },
   {
     id: 'workflow-pro',
-    title: 'أتمتة سير العمل (n8n/Zapier)',
-    price: '199$',
-    features: ['ربط 5 تطبيقات أساسية', 'تقارير تلقائية للمبيعات', 'تنبيهات فورية'],
-    icon: <Workflow className="w-8 h-8" />
+    title: 'أتمتة سير العمل (n8n/Cloud)',
+    price: '$199',
+    features: ['ربط 10 تطبيقات أساسية', 'تقارير تلقائية للمبيعات', 'تنبيهات فورية'],
+    icon: <Workflow size={40} />
   }
 ];
 
 export const ROI_STATS = [
-  { label: 'ساعة توفير شهرياً', value: '180+', icon: <Clock className="text-cyan-500" /> },
-  { label: 'زيادة في الإنتاجية', value: '65%', icon: <TrendingUp className="text-cyan-500" /> },
-  { label: 'تقليل الأخطاء البشرية', value: '94%', icon: <Target className="text-cyan-500" /> },
+  { label: 'ساعة توفير شهرياً', value: '180+', icon: <Clock size={32} className="text-brand-cyan" /> },
+  { label: 'زيادة في الإنتاجية', value: '65%', icon: <TrendingUp size={32} className="text-brand-blue" /> },
+  { label: 'تقليل الأخطاء البشرية', value: '94%', icon: <Target size={32} className="text-brand-purple" /> },
 ];
 
 export const SYNERGY_SCENARIOS = (lang: string) => [
