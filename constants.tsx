@@ -89,9 +89,21 @@ export const TRANSLATIONS = {
 };
 
 export const PAIN_POINTS = (lang: string) => [
-  { title: lang === 'ar' ? 'الرد اليدوي يقتل المبيعات' : 'Manual Response Kills Sales', icon: <Clock className="text-red-500" /> },
-  { title: lang === 'ar' ? 'بيانات مشتتة وفقدان أرباح' : 'Scattered Data & Profit Loss', icon: <AlertCircle className="text-red-500" /> },
-  { title: lang === 'ar' ? 'بطء الاستجابة يطرد العملاء' : 'Slow Response Drives Away Clients', icon: <Users className="text-red-500" /> },
+  { 
+    title: lang === 'ar' ? 'الرد اليدوي يقتل المبيعات' : 'Manual Response Kills Sales', 
+    desc: lang === 'ar' ? 'كل ثانية تأخير في الرد تعني فقدان عميل محتمل. أنظمتنا ترد في أقل من 3 ثوانٍ.' : 'Every second of delay is a lost lead. Our systems respond in under 3 seconds.',
+    icon: <Clock className="text-red-500" /> 
+  },
+  { 
+    title: lang === 'ar' ? 'بيانات مشتتة وفقدان أرباح' : 'Scattered Data & Profit Loss', 
+    desc: lang === 'ar' ? 'فقدان المعلومات بين المنصات يمنعك من رؤية الحقيقة. نحن نربط كل شيء في لوحة تحكم واحدة.' : 'Losing info between platforms blinds you. We sync everything into one dashboard.',
+    icon: <AlertCircle className="text-red-500" /> 
+  },
+  { 
+    title: lang === 'ar' ? 'بطء الاستجابة يطرد العملاء' : 'Slow Response Drives Away Clients', 
+    desc: lang === 'ar' ? 'العميل الحديث لا ينتظر. إذا لم تكن موجوداً الآن، سيذهب لمنافسك فوراً.' : 'Modern clients don\'t wait. If you aren\'t there now, they\'ll go to your competitor.',
+    icon: <Users className="text-red-500" /> 
+  },
 ];
 
 export const WORKFLOW_USE_CASES = (lang: string) => [
