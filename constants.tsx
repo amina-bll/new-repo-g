@@ -3,7 +3,7 @@ import {
   Cpu, Zap, Clock, ShieldCheck, Workflow, Network, Database, MessageSquare, 
   Coins, BrainCircuit, Bot, TrendingUp, Target, Share2, Sparkles, Command, 
   Activity, Users, AlertCircle, Rocket, BarChart3, Check, ShoppingBag, 
-  Mail, Search, Layout, FileText, Globe
+  Mail, Search, Layout, FileText, Globe, Scale, GraduationCap, Truck
 } from 'lucide-react';
 import { Template, Language } from './types';
 
@@ -31,12 +31,14 @@ export const TRANSLATIONS = {
     useCasesTitle: 'مكتبة الحلول الذكية',
     useCasesSub: 'شاهد كيف قمنا بتحويل الأعمال التقليدية إلى أنظمة ذاتية التشغيل والنمو.',
     contactTitle: 'دعنا نصمم نظامك القادم',
-    contactSub: 'أجب على 3 أسئلة وسيقوم نظامنا بتصميم مسار الأتمتة الأنسب لمشروعك.',
+    contactSub: 'أجب على الأسئلة وسيقوم نظامنا بتصميم مسار الأتمتة الأنسب لمشروعك.',
     formName: 'اسمك الكريم',
     formEmail: 'بريد العمل',
     formMessage: 'ما هو أكبر عائق يمنع عملك من النمو الآلي؟',
     formSubmit: 'إرسال للمستشار',
     backToHome: 'العودة للرئيسية',
+    successMsg: 'تم استلام طلبك بنجاح! سيتواصل معك مستشارنا الذكي قريباً.',
+    errorMsg: 'عذراً، حدث خطأ ما. يرجى المحاولة مرة أخرى.',
   },
   en: {
     brand: 'Manara Ops',
@@ -55,12 +57,14 @@ export const TRANSLATIONS = {
     useCasesTitle: 'Smart Automation Library',
     useCasesSub: 'See how we transformed traditional businesses into self-operating systems.',
     contactTitle: 'Design Your Success',
-    contactSub: 'Answer 3 questions and our system will design your ideal automation path.',
+    contactSub: 'Fill the form and our system will design your ideal automation path.',
     formName: 'Full Name',
     formEmail: 'Business Email',
     formMessage: 'What is your biggest bottleneck right now?',
     formSubmit: 'Send to Consultant',
     backToHome: 'Back to Home',
+    successMsg: 'Success! Our AI consultant will reach out to you shortly.',
+    errorMsg: 'Something went wrong. Please try again later.',
   },
   fr: {
     brand: 'Manara Ops',
@@ -79,36 +83,62 @@ export const TRANSLATIONS = {
     useCasesTitle: 'Bibliothèque d\'Automation',
     useCasesSub: 'Découvrez comment nous automatisons des business réels.',
     contactTitle: 'Concevons Votre Succès',
-    contactSub: 'Répondez à 3 questions pour obtenir votre plan d\'automation.',
+    contactSub: 'Remplissez le formulaire pour obtenir votre plan d\'automation.',
     formName: 'Nom Complet',
     formEmail: 'Email Pro',
     formMessage: 'Quel est votre plus gros blocage ?',
     formSubmit: 'Envoyer au Consultant',
     backToHome: 'Retour à l\'accueil',
+    successMsg: 'Réussite ! Notre consultant IA vous contactera bientôt.',
+    errorMsg: 'Une erreur est survenue. Veuillez réessayer.',
   }
 };
 
 export const PAIN_POINTS = (lang: string) => [
   { 
-    title: lang === 'ar' ? 'الرد اليدوي يقتل المبيعات' : 'Manual Response Kills Sales', 
-    desc: lang === 'ar' ? 'كل ثانية تأخير في الرد تعني فقدان عميل محتمل. أنظمتنا ترد في أقل من 3 ثوانٍ.' : 'Every second of delay is a lost lead. Our systems respond in under 3 seconds.',
-    icon: <Clock className="text-red-500" /> 
+    title: lang === 'ar' ? 'نزيف الوقت في المهام المتكررة' : 'Time Bleeding in Repetitive Tasks', 
+    desc: lang === 'ar' ? 'أنت تقضي 70% من يومك في مهام يمكن للذكاء الاصطناعي إنهاؤها في ثوانٍ. استعد وقتك للإبداع والتوسع.' : 'You spend 70% of your day on tasks AI can finish in seconds. Reclaim your time for scaling.',
+    icon: <Clock className="text-blue-500" /> 
   },
   { 
-    title: lang === 'ar' ? 'بيانات مشتتة وفقدان أرباح' : 'Scattered Data & Profit Loss', 
-    desc: lang === 'ar' ? 'فقدان المعلومات بين المنصات يمنعك من رؤية الحقيقة. نحن نربط كل شيء في لوحة تحكم واحدة.' : 'Losing info between platforms blinds you. We sync everything into one dashboard.',
-    icon: <AlertCircle className="text-red-500" /> 
+    title: lang === 'ar' ? 'فقدان العملاء بسبب بطء الرد' : 'Losing Leads Due to Slow Response', 
+    desc: lang === 'ar' ? 'العميل الذي ينتظر أكثر من 5 دقائق يذهب لمنافسك. أنظمتنا تغلق المبيعات حتى وأنت نائم.' : 'Leads waiting over 5 mins go to competitors. Our systems close deals while you sleep.',
+    icon: <Zap className="text-yellow-500" /> 
   },
   { 
-    title: lang === 'ar' ? 'بطء الاستجابة يطرد العملاء' : 'Slow Response Drives Away Clients', 
-    desc: lang === 'ar' ? 'العميل الحديث لا ينتظر. إذا لم تكن موجوداً الآن، سيذهب لمنافسك فوراً.' : 'Modern clients don\'t wait. If you aren\'t there now, they\'ll go to your competitor.',
-    icon: <Users className="text-red-500" /> 
+    title: lang === 'ar' ? 'فوضى البيانات وعدم الربط' : 'Data Chaos & Lack of Sync', 
+    desc: lang === 'ar' ? 'معلوماتك مشتتة بين التطبيقات؟ نحن نبني "دماغاً مركزياً" يربط كل أدواتك في مكان واحد.' : 'Info scattered across apps? We build a "Central Brain" syncing everything in one place.',
+    icon: <Database className="text-purple-500" /> 
   },
 ];
 
 export const WORKFLOW_USE_CASES = (lang: string) => [
   {
     id: 1,
+    category: lang === 'ar' ? 'للمحامين' : 'For Lawyers',
+    title: lang === 'ar' ? 'أتمتة مراجعة العقود القانونية' : 'Legal Contract Review Bot',
+    desc: lang === 'ar' ? 'تحليل آلي للعقود واستخراج الثغرات القانونية في ثوانٍ باستخدام ذكاء اصطناعي مدرب قانونياً.' : 'AI analysis of contracts to extract legal gaps in seconds with specialized models.',
+    tools: [<Scale size={16} />, <FileText size={16} />, <ShieldCheck size={16} />],
+    roi: lang === 'ar' ? 'توفير 15 ساعة مراجعة أسبوعياً' : 'Saves 15h/week'
+  },
+  {
+    id: 2,
+    category: lang === 'ar' ? 'للتجارة الإلكترونية' : 'For E-commerce',
+    title: lang === 'ar' ? 'مزامنة المخزون والطلبات الذكية' : 'Smart Inventory & Order Sync',
+    desc: lang === 'ar' ? 'ربط متجرك مع الموردين وشركات الشحن لتحديث الكميات وإرسال التتبع آلياً للعميل.' : 'Connect store with suppliers & shipping to update stock and send tracking automatically.',
+    tools: [<ShoppingBag size={16} />, <Truck size={16} />, <Zap size={16} />],
+    roi: lang === 'ar' ? 'تقليل أخطاء الطلبات بنسبة 95%' : '-95% Order Errors'
+  },
+  {
+    id: 3,
+    category: lang === 'ar' ? 'للأساتذة والمؤثرين' : 'For Educators',
+    title: lang === 'ar' ? 'مساعد تعليمي يعمل بالذكاء الاصطناعي' : 'AI Education Assistant',
+    desc: lang === 'ar' ? 'بوت يرد على أسئلة الطلاب بناءً على محاضراتك، ينظم مواعيد الاختبارات ويصحح الواجبات.' : 'Bot answers student FAQs based on your lectures, schedules exams, and grades assignments.',
+    tools: [<GraduationCap size={16} />, <MessageSquare size={16} />, <BrainCircuit size={16} />],
+    roi: lang === 'ar' ? 'تفاعل الطلاب 24/7 بدون تدخل' : '24/7 Student Engagement'
+  },
+  {
+    id: 4,
     category: 'Marketing',
     title: lang === 'ar' ? 'أتمتة جلب العملاء من فيسبوك' : 'FB Lead Gen Automation',
     desc: lang === 'ar' ? 'تحويل كل مهتم من Facebook Ads إلى واتساب مباشرة مع تسجيل بياناته في ملف Google Sheets.' : 'Instantly push FB Ads leads to WhatsApp & Google Sheets.',
@@ -116,7 +146,7 @@ export const WORKFLOW_USE_CASES = (lang: string) => [
     roi: lang === 'ar' ? 'توفير 5 ساعات عمل أسبوعياً' : 'Saves 5h/week'
   },
   {
-    id: 2,
+    id: 5,
     category: 'Sales',
     title: lang === 'ar' ? 'نظام المتابعة الذكي (Follow-up)' : 'Smart Sales Follow-up',
     desc: lang === 'ar' ? 'متابعة العملاء الذين لم يشتروا بعد بشكل آلي عبر البريد والواتساب بناءً على سلوكهم.' : 'Automated follow-ups via Email/WA based on user behavior.',
@@ -124,7 +154,7 @@ export const WORKFLOW_USE_CASES = (lang: string) => [
     roi: lang === 'ar' ? 'زيادة التحويل بنسبة 25%' : '+25% Conversion'
   },
   {
-    id: 3,
+    id: 6,
     category: 'Operations',
     title: lang === 'ar' ? 'أتمتة الفواتير والتقارير' : 'Invoicing & Reporting',
     desc: lang === 'ar' ? 'إنشاء فواتير PDF تلقائياً عند كل عملية بيع وإرسال تقرير مالي يومي للمدير.' : 'Auto-generate invoices & send daily financial reports.',

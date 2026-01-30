@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import { 
@@ -21,6 +20,11 @@ const App: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [theme, setTheme] = useState<'dark' | 'light'>('light'); 
   
+  // Form States
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formStatus, setFormStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+
   const currentLang = LANGUAGES.find(l => l.code === langCode)!;
   const t = TRANSLATIONS[langCode];
   const contactRef = useRef<HTMLElement>(null);
@@ -46,9 +50,35 @@ const App: React.FC = () => {
 
   const scrollToContact = () => contactRef.current?.scrollIntoView({ behavior: 'smooth' });
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setFormStatus('idle');
+
+    try {
+      const { error } = await supabase
+        .from('leads')
+        .insert([{ 
+          name: formData.name, 
+          email: formData.email, 
+          message: formData.message,
+          project_type: currentPage 
+        }]);
+
+      if (error) throw error;
+      
+      setFormStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+    } catch (err) {
+      console.error(err);
+      setFormStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const Hero = () => (
     <section className="relative min-h-[90vh] flex flex-col items-center justify-center pt-32 pb-20 px-6 overflow-hidden">
-      {/* Dynamic Background Elements */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] opacity-[0.03] dark:opacity-[0.07] pointer-events-none">
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-full h-full animate-[spin_120s_linear_infinite]">
           <path fill="#2563EB" d="M45.7,-78.2C58.9,-71.4,69.1,-58.5,76.5,-44.6C83.9,-30.7,88.5,-15.3,87.7,-0.5C86.9,14.4,80.7,28.7,72.4,41.4C64,54.1,53.5,65.2,40.7,72.6C27.9,80.1,13.9,83.9,-0.6,85C-15.1,86.1,-30.2,84.4,-43.5,77.5C-56.7,70.5,-68.1,58.3,-75.9,44.4C-83.7,30.5,-87.9,15.2,-87.4,0.3C-86.8,-14.7,-81.5,-29.3,-72.9,-42C-64.3,-54.6,-52.3,-65.3,-38.8,-71.9C-25.2,-78.4,-12.6,-80.9,1.5,-83.4C15.6,-85.9,32.5,-85.1,45.7,-78.2Z" transform="translate(100 100)" />
@@ -62,14 +92,14 @@ const App: React.FC = () => {
           className="inline-flex items-center gap-3 px-5 py-2 rounded-full glass mb-10 border border-blue-500/10 shadow-sm"
         >
           <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
-          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-blue">Premier AI Automation</span>
+          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-blue">Premier AI Automation Agency</span>
         </motion.div>
 
         <motion.h1 
           initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-4xl md:text-6xl lg:text-[5.5rem] font-black leading-[1.05] tracking-tight mb-12 dark:text-white text-slate-900"
+          className="text-4xl md:text-6xl lg:text-[4.2rem] font-black leading-[1.1] tracking-tight mb-12 dark:text-white text-slate-900"
         >
           {t.heroTitle}
         </motion.h1>
@@ -99,18 +129,6 @@ const App: React.FC = () => {
             {t.ctaExplore}
           </button>
         </motion.div>
-
-        {/* Brand Logos */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.25 }}
-          transition={{ delay: 1 }}
-          className="mt-24 flex flex-wrap justify-center items-center gap-10 grayscale opacity-40"
-        >
-          <div className="flex items-center gap-2 font-black text-xl tracking-tighter"><Layers size={20}/> LAYER</div>
-          <div className="flex items-center gap-2 font-black text-xl tracking-tighter"><Shield size={20}/> SECURE</div>
-          <div className="flex items-center gap-2 font-black text-xl tracking-tighter"><Activity size={20}/> PULSE</div>
-        </motion.div>
       </div>
 
       <motion.div 
@@ -132,12 +150,12 @@ const App: React.FC = () => {
             <TiltCard key={i}>
               <div className="bento-card p-12 rounded-[3.5rem] glass bg-white/40 dark:bg-white/[0.01] border-slate-200/50 dark:border-white/5 group h-full">
                 <div className="spotlight"></div>
-                <div className="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center mb-8 text-red-500 group-hover:scale-110 group-hover:rotate-6 transition-transform">
+                <div className="w-16 h-16 bg-blue-500/5 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-6 transition-transform">
                   {pain.icon}
                 </div>
-                <h3 className="text-3xl font-black mb-6 leading-tight">{pain.title}</h3>
-                <p className="text-slate-500 dark:text-white/40 font-medium leading-relaxed">
-                  {pain.desc || "أتمتة العمليات تعني استجابة فورية، وهو ما يرفع معدلات التحويل بنسبة تتجاوز 40%."}
+                <h3 className="text-2xl font-black mb-6 leading-tight">{pain.title}</h3>
+                <p className="text-slate-500 dark:text-white/40 font-medium text-sm leading-relaxed">
+                  {pain.desc}
                 </p>
               </div>
             </TiltCard>
@@ -164,11 +182,14 @@ const App: React.FC = () => {
                 <span className="px-4 py-1.5 rounded-full bg-brand-blue/10 text-brand-blue text-[9px] font-black uppercase tracking-widest">{uc.category}</span>
                 <ArrowUpRight className="opacity-20 group-hover:opacity-100 group-hover:text-brand-blue transition-all" size={18} />
               </div>
-              <h4 className="text-2xl font-black mb-6 leading-tight">{uc.title}</h4>
-              <p className="dark:text-white/40 text-slate-500 mb-10 text-sm font-medium leading-relaxed">{uc.desc}</p>
-              <div className="pt-6 border-t border-slate-100 dark:border-white/5">
-                <div className="text-green-500 flex items-center gap-3 font-black text-[10px] uppercase tracking-widest">
-                  <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+              <h4 className="text-xl font-black mb-4 leading-tight">{uc.title}</h4>
+              <p className="dark:text-white/40 text-slate-500 mb-8 text-xs font-medium leading-relaxed h-12 overflow-hidden">{uc.desc}</p>
+              <div className="pt-6 border-t border-slate-100 dark:border-white/5 flex items-center justify-between">
+                <div className="flex gap-2">
+                   {uc.tools.map((tool, idx) => <span key={idx} className="opacity-30">{tool}</span>)}
+                </div>
+                <div className="text-green-500 flex items-center gap-2 font-black text-[9px] uppercase tracking-widest">
+                  <div className="w-1 h-1 rounded-full bg-green-500"></div>
                   {uc.roi}
                 </div>
               </div>
@@ -230,7 +251,7 @@ const App: React.FC = () => {
                 {WORKFLOW_USE_CASES(langCode).map((uc) => (
                   <div key={uc.id} className="bento-card p-12 rounded-[3.5rem] glass dark:bg-white/[0.02]">
                     <span className="text-[9px] font-black uppercase tracking-[0.3em] text-brand-blue mb-6 block">{uc.category}</span>
-                    <h4 className="text-3xl font-black mb-6 leading-tight">{uc.title}</h4>
+                    <h4 className="text-2xl font-black mb-6 leading-tight">{uc.title}</h4>
                     <p className="text-slate-500 dark:text-white/40 mb-10 text-sm leading-relaxed">{uc.desc}</p>
                     <div className="text-green-500 font-black text-[10px] uppercase tracking-widest flex items-center gap-2">
                       <Zap size={14} /> {uc.roi}
@@ -274,25 +295,62 @@ const App: React.FC = () => {
               className="mt-24 glass rounded-[4rem] p-12 md:p-20 shadow-3xl overflow-hidden relative"
             >
               <div className="absolute top-0 right-0 w-64 h-64 bg-brand-blue/5 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2"></div>
-              <form className="space-y-10 relative z-10">
-                <div className="grid md:grid-cols-2 gap-10">
-                  <div className="space-y-4">
-                    <label className="text-[10px] font-black uppercase tracking-[0.3em] opacity-30 px-4">{t.formName}</label>
-                    <input className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 rounded-2xl px-8 py-6 outline-none focus:border-brand-blue transition-all" placeholder="John Doe" />
+              
+              {formStatus === 'success' ? (
+                <div className="text-center py-20 relative z-10">
+                  <div className="w-24 h-24 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-8 text-green-500">
+                    <Check size={48} />
+                  </div>
+                  <h3 className="text-3xl font-black mb-4">{t.successMsg}</h3>
+                  <Button onClick={() => setFormStatus('idle')} variant="outline" className="mt-8">إرسال رسالة أخرى</Button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-10 relative z-10">
+                  <div className="grid md:grid-cols-2 gap-10">
+                    <div className="space-y-4">
+                      <label className="text-[10px] font-black uppercase tracking-[0.3em] opacity-30 px-4">{t.formName}</label>
+                      <input 
+                        required
+                        value={formData.name}
+                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                        className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 rounded-2xl px-8 py-6 outline-none focus:border-brand-blue transition-all" 
+                        placeholder="..." 
+                      />
+                    </div>
+                    <div className="space-y-4">
+                      <label className="text-[10px] font-black uppercase tracking-[0.3em] opacity-30 px-4">{t.formEmail}</label>
+                      <input 
+                        required
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                        className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 rounded-2xl px-8 py-6 outline-none focus:border-brand-blue transition-all" 
+                        placeholder="business@email.com" 
+                      />
+                    </div>
                   </div>
                   <div className="space-y-4">
-                    <label className="text-[10px] font-black uppercase tracking-[0.3em] opacity-30 px-4">{t.formEmail}</label>
-                    <input className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 rounded-2xl px-8 py-6 outline-none focus:border-brand-blue transition-all" placeholder="business@email.com" />
+                    <label className="text-[10px] font-black uppercase tracking-[0.3em] opacity-30 px-4">{t.formMessage}</label>
+                    <textarea 
+                      required
+                      value={formData.message}
+                      onChange={(e) => setFormData({...formData, message: e.target.value})}
+                      rows={4} 
+                      className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 rounded-2xl px-8 py-6 outline-none focus:border-brand-blue transition-all resize-none" 
+                      placeholder="..."
+                    ></textarea>
                   </div>
-                </div>
-                <div className="space-y-4">
-                  <label className="text-[10px] font-black uppercase tracking-[0.3em] opacity-30 px-4">{t.formMessage}</label>
-                  <textarea rows={4} className="w-full bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 rounded-2xl px-8 py-6 outline-none focus:border-brand-blue transition-all resize-none" placeholder="..."></textarea>
-                </div>
-                <Button className="w-full !py-8 !rounded-3xl !text-xl shadow-2xl shadow-blue-500/30">
-                  {t.formSubmit}
-                </Button>
-              </form>
+                  
+                  {formStatus === 'error' && <p className="text-red-500 font-bold text-center">{t.errorMsg}</p>}
+                  
+                  <Button 
+                    className={`w-full !py-8 !rounded-3xl !text-xl shadow-2xl shadow-blue-500/30 ${isSubmitting ? 'opacity-50' : ''}`}
+                    onClick={(e) => {}} // Form handled by onSubmit
+                  >
+                    {isSubmitting ? '...' : t.formSubmit}
+                  </Button>
+                </form>
+              )}
             </motion.div>
           </div>
         </section>
