@@ -2,11 +2,11 @@
 <html lang="ar" dir="rtl" class="light">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Manara Ops | AI Automation MENA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Manara Ops | Future of AI Automation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Readex+Pro:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&family=Readex+Pro:wght@200;400;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -15,16 +15,14 @@
           extend: {
             fontFamily: {
               sans: ['Readex Pro', 'sans-serif'],
-              display: ['Space Grotesk', 'sans-serif'],
+              display: ['Plus Jakarta Sans', 'sans-serif'],
             },
             colors: {
               brand: {
-                cyan: '#06b6d4',
-                blue: '#3b82f6',
-                purple: '#8b5cf6',
-                deep: '#030712',
-                slate: '#0f172a',
-                light: '#f8fafc',
+                cyan: '#0ea5e9',
+                blue: '#2563eb',
+                purple: '#7c3aed',
+                deep: '#020617',
               },
             },
           },
@@ -32,54 +30,96 @@
       };
     </script>
     <style>
+      :root {
+        --glass-bg: rgba(255, 255, 255, 0.7);
+        --glass-border: rgba(255, 255, 255, 0.4);
+      }
+      .dark {
+        --glass-bg: rgba(15, 23, 42, 0.3);
+        --glass-border: rgba(255, 255, 255, 0.05);
+      }
+
       html { scroll-behavior: smooth; }
       body {
         font-family: 'Readex Pro', sans-serif;
         background-color: #f8fafc;
         color: #0f172a;
-        transition: background-color 0.3s ease, color 0.3s ease;
         overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
       }
-      .dark body {
-        background-color: #030712;
-        color: #f8fafc;
+      .dark body { background-color: #020617; color: #f8fafc; }
+
+      /* Mesh Gradient Background */
+      .mesh-bg {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        z-index: -1;
+        background: radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.05) 0px, transparent 50%),
+                    radial-gradient(at 100% 0%, rgba(124, 58, 237, 0.05) 0px, transparent 50%),
+                    radial-gradient(at 100% 100%, rgba(14, 165, 233, 0.05) 0px, transparent 50%),
+                    radial-gradient(at 0% 100%, rgba(37, 99, 235, 0.05) 0px, transparent 50%);
+        filter: blur(80px);
       }
-      .dora-gradient {
-        transition: background 0.5s ease;
+      .dark .mesh-bg {
+        background: radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.15) 0px, transparent 50%),
+                    radial-gradient(at 100% 0%, rgba(124, 58, 237, 0.1) 0px, transparent 50%);
       }
-      .light .dora-gradient {
-        background: radial-gradient(circle at 50% -20%, rgba(59, 130, 246, 0.08), transparent 50%),
-                    radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.05), transparent 40%);
+
+      /* Noise overlay */
+      body::after {
+        content: "";
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+        opacity: 0.03;
+        pointer-events: none;
+        z-index: 9998;
       }
-      .dark .dora-gradient {
-        background: radial-gradient(circle at 50% -20%, rgba(59, 130, 246, 0.2), transparent 50%),
-                    radial-gradient(circle at 0% 100%, rgba(139, 92, 246, 0.1), transparent 40%);
-      }
+
       .glass {
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        transition: background 0.3s ease, border 0.3s ease;
+        background: var(--glass-bg);
+        backdrop-filter: blur(24px) saturate(180%);
+        -webkit-backdrop-filter: blur(24px) saturate(180%);
+        border: 1px solid var(--glass-border);
       }
-      .light .glass {
-        background: rgba(255, 255, 255, 0.7);
-        border: 1px solid rgba(15, 23, 42, 0.05);
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+
+      /* Chatwoot custom styles */
+      .woot-widget-bubble {
+        bottom: 24px !important;
+        left: 24px !important;
+        right: auto !important;
+        z-index: 2147483647 !important;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.1) !important;
+        transition: all 0.3s ease !important;
       }
-      .dark .glass {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+      .woot-widget-bubble:hover { transform: scale(1.05) translateY(-5px) !important; }
+
+      @media (max-width: 640px) {
+        .woot-widget-bubble { left: 16px !important; bottom: 16px !important; }
       }
-      .text-glow {
-        transition: text-shadow 0.3s ease;
+
+      .bento-card {
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
       }
-      .dark .text-glow {
-        text-shadow: 0 0 40px rgba(59, 130, 246, 0.4);
+      .bento-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+        opacity: 0;
+        transition: opacity 0.6s ease;
       }
-      ::-webkit-scrollbar { width: 6px; }
-      .light ::-webkit-scrollbar-track { background: #f8fafc; }
-      .dark ::-webkit-scrollbar-track { background: #030712; }
-      .light ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-      .dark ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+      .bento-card:hover::before { opacity: 1; }
+      .bento-card:hover {
+        transform: translateY(-10px) scale(1.01);
+        box-shadow: 0 40px 80px -20px rgba(0,0,0,0.1);
+      }
+      .dark .bento-card:hover {
+        box-shadow: 0 40px 80px -20px rgba(0,0,0,0.4);
+        border-color: rgba(255,255,255,0.1);
+      }
     </style>
     <script type="importmap">
     {
@@ -95,8 +135,10 @@
     </script>
   </head>
   <body>
+    <div class="mesh-bg"></div>
     <div id="root"></div>
     <script type="module" src="index.tsx"></script>
+    
     <script>
       (function(d,t) {
         var BASE_URL="https://chatwoot.panel.myserver-n8n.site";
